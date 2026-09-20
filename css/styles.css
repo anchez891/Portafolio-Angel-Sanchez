@@ -1,0 +1,382 @@
+/* ==========================================================================
+   PORTAFOLIO · ANGEL SANCHEZ
+   Estilos propios que complementan a Bootstrap 5.3
+
+   ÍNDICE
+   1. Variables (colores, tipografías)  <- aquí se cambia la identidad visual
+   2. Base
+   3. Navegación
+   4. Hero
+   5. Divisor de fibra (splitter)
+   6. Secciones y títulos
+   7. Sobre mí
+   8. Redes FTTH
+   9. Data Analytics
+   10. Formación
+   11. Herramientas
+   12. Contacto y pie
+   13. Botones
+   14. Accesibilidad y movimiento reducido
+   ========================================================================== */
+
+
+/* 1. VARIABLES ----------------------------------------------------------- */
+:root {
+  /* Colores base (el azul viene del currículum) */
+  --navy:      #2e3163;
+  --navy-deep: #1f2148;
+  --ink:       #1c1e36;
+  --muted:     #5a5e7a;
+  --paper:     #f4f6fb;
+  --line:      #d9ddea;
+  --white:     #ffffff;
+
+  /* Color de cada perfil: ámbar = redes FTTH, aqua = datos */
+  --amber:     #f5a623;
+  --amber-ink: #8a5a00;   /* ámbar oscuro para texto sobre fondo claro */
+  --aqua:      #37c2bd;
+  --aqua-ink:  #0f7a76;   /* aqua oscuro para texto sobre fondo claro */
+
+  /* Tipografías */
+  --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --font-body:    "Source Sans 3", "Segoe UI", sans-serif;
+
+  /* Espaciado vertical de las secciones */
+  --section-space: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+
+/* 2. BASE ---------------------------------------------------------------- */
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--navy);
+}
+
+p { max-width: 68ch; }
+
+
+/* 3. NAVEGACIÓN ---------------------------------------------------------- */
+.site-nav {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.site-nav .navbar-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--navy);
+}
+.site-nav .nav-link { color: var(--muted); font-weight: 600; }
+.site-nav .nav-link:hover { color: var(--navy); }
+
+
+/* 4. HERO ---------------------------------------------------------------- */
+.hero {
+  padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(2rem, 5vw, 3.5rem);
+  background: var(--paper);
+}
+.hero-name {
+  font-size: clamp(3rem, 9vw, 6rem);
+  line-height: 0.95;
+  margin-bottom: 1rem;
+}
+.hero-role {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+.hero-lead { color: var(--muted); font-size: 1.15rem; margin-bottom: 1.75rem; }
+
+.hero-photo { position: relative; }
+.hero-photo::before {           /* bloque ámbar desplazado detrás de la foto */
+  content: "";
+  position: absolute;
+  inset: 0.9rem -0.9rem -0.9rem 0.9rem;
+  background: var(--amber);
+  border-radius: 1.5rem;
+}
+.hero-photo img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: 50% 68%;   /* ajusta el encuadre de la cara */
+  border-radius: 1.5rem;
+  border: 4px solid var(--white);
+}
+
+
+/* 5. DIVISOR DE FIBRA ---------------------------------------------------- */
+.splitter { background: var(--paper); padding-bottom: var(--section-space); }
+.splitter-svg {
+  display: block;
+  width: 100%;
+  height: auto;          /* alto proporcional: la línea cae justo sobre cada tarjeta */
+  overflow: visible;
+}
+.splitter-svg path {
+  fill: none;
+  stroke-width: 0.35;
+  stroke-linecap: round;
+}
+.fiber-base  { stroke: var(--navy); opacity: 0.25; }
+.fiber-pulse {                        /* pulso de luz: se ejecuta 2 veces al cargar */
+  stroke: var(--amber);
+  stroke-dasharray: 8 92;
+  stroke-dashoffset: 8;
+  animation: pulse 3s ease-in-out 0.4s 2 forwards;
+}
+.fiber-pulse-b { stroke: var(--aqua); }
+@keyframes pulse {
+  from { stroke-dashoffset: 8; }
+  to   { stroke-dashoffset: -100; }
+}
+
+.profile-link {
+  display: block;
+  height: 100%;
+  padding: 1.5rem 1.5rem 1.6rem;
+  background: var(--white);
+  border-radius: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  border-top: 6px solid var(--amber);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.profile-datos { border-top-color: var(--aqua); }
+.profile-link:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(46, 49, 99, 0.12); }
+.profile-link-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+}
+.profile-link-text { display: block; color: var(--muted); }
+
+
+/* 6. SECCIONES Y TÍTULOS ------------------------------------------------- */
+.section { padding: var(--section-space) 0; }
+.section-title { font-size: clamp(2rem, 5vw, 3.25rem); margin-bottom: 1rem; }
+.section-intro { font-size: 1.15rem; color: var(--muted); margin-bottom: 2.5rem; }
+.mini-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.gallery-title { font-size: 1.5rem; margin: 3.5rem 0 1.25rem; }
+.small-note { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
+
+
+/* 7. SOBRE MÍ ------------------------------------------------------------ */
+.lead-text { font-size: 1.3rem; line-height: 1.55; color: var(--navy); }
+.facts { margin: 2rem 0 0; border-top: 1px solid var(--line); }
+.facts > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.facts dt { font-weight: 600; color: var(--muted); }
+.facts dd { margin: 0; }
+
+
+/* 8. REDES FTTH ---------------------------------------------------------- */
+.section-redes { background: var(--paper); }
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.75rem;
+  border-left: 3px solid var(--amber);
+}
+.timeline li { position: relative; padding-bottom: 1.75rem; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before {           /* punto de la línea de tiempo */
+  content: "";
+  position: absolute;
+  left: calc(-1.75rem - 8px);
+  top: 0.35rem;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--amber);
+}
+.timeline-date { font-weight: 600; color: var(--amber-ink); }
+.timeline h3 { font-size: 1.35rem; margin: 0.15rem 0 0.35rem; }
+.timeline p { margin: 0; color: var(--muted); }
+
+.highlight { padding: 1.5rem; border-radius: 1rem; margin-bottom: 2rem; }
+.highlight h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.highlight p { margin: 0; }
+.highlight-amber { background: var(--white); border-left: 6px solid var(--amber); }
+
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 2rem;
+  font-size: 0.95rem;
+}
+
+/* Galería y espacios de imagen (.slot = pendiente, .media = imagen real) */
+.slot,
+.media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.75rem;
+}
+.media { object-fit: cover; }
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  word-break: break-all;
+  background: repeating-linear-gradient(135deg, var(--white), var(--white) 10px, var(--paper) 10px, var(--paper) 20px);
+  border: 2px dashed var(--line);
+}
+.gallery-item { margin: 0; }
+.gallery-item figcaption { margin-top: 0.5rem; font-size: 0.95rem; color: var(--muted); }
+
+
+/* 9. DATA ANALYTICS ------------------------------------------------------ */
+.section-datos { background: var(--navy); color: #e6e8f5; }
+.section-datos .section-title,
+.section-datos h3 { color: var(--white); }
+.section-datos .section-intro { color: #c4c8e2; }
+
+.project {
+  height: 100%;
+  padding: 1.75rem;
+  border-radius: 1rem;
+  background: var(--navy-deep);
+}
+.project h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+.project p:last-child { margin-bottom: 0; color: #c4c8e2; }
+.project-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 20rem;
+  background: var(--aqua);
+  color: var(--navy-deep);
+}
+.project-main h3 { color: var(--navy-deep); }
+.project-main p:last-child { color: var(--navy-deep); }
+.project-figure {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(5rem, 14vw, 8rem);
+  line-height: 0.9;
+  margin: 0 0 1rem;
+  color: var(--navy-deep);
+}
+
+.link-aqua { color: var(--aqua); font-weight: 600; }
+.link-aqua:hover { color: var(--white); }
+
+.post {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--white);
+  color: var(--ink);
+}
+.post .slot, .post .media { border-radius: 0; }
+.post-body { padding: 1.25rem; }
+.post-body p { margin-bottom: 0.75rem; }
+.post-body a { color: var(--aqua-ink); font-weight: 600; }
+
+
+/* 10. FORMACIÓN ---------------------------------------------------------- */
+.plain-list { list-style: none; margin: 0; padding: 0; }
+.plain-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+.course-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  columns: 2 16rem;         /* dos columnas; pasa a una en pantallas angostas */
+  column-gap: 2rem;
+}
+.course-list li { break-inside: avoid; padding: 0.2rem 0; }
+.course-list li::marker { color: var(--aqua-ink); }
+
+
+/* 11. HERRAMIENTAS ------------------------------------------------------- */
+.section-tools { background: var(--paper); }
+.tool-group {
+  font-size: 1.25rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 4px solid var(--navy);
+}
+.tool-redes { border-bottom-color: var(--amber); }
+.tool-datos { border-bottom-color: var(--aqua); }
+.tool-list { list-style: none; margin: 0; padding: 0; }
+.tool-list li { padding: 0.25rem 0; }
+
+
+/* 12. CONTACTO Y PIE ----------------------------------------------------- */
+.section-contact { background: var(--navy-deep); color: #e6e8f5; }
+.contact-lead { font-size: 1.2rem; color: #c4c8e2; }
+.contact-list { list-style: none; margin: 0; padding: 0; }
+.contact-list li {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+.contact-list span { color: #aab0d4; }
+.contact-list a { color: var(--white); text-decoration-color: var(--amber); text-underline-offset: 4px; overflow-wrap: anywhere; }
+.contact-list a:hover { color: var(--amber); }
+
+.site-footer { background: var(--navy-deep); color: #aab0d4; padding: 1.25rem 0; font-size: 0.95rem; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.site-footer a { color: #aab0d4; }
+.site-footer a:hover { color: var(--white); }
+
+
+/* 13. BOTONES ------------------------------------------------------------ */
+.btn-amber { background: var(--amber); border-color: var(--amber); color: var(--navy-deep); font-weight: 600; }
+.btn-amber:hover { background: #ffb840; border-color: #ffb840; color: var(--navy-deep); }
+.btn-aqua  { background: var(--navy); border-color: var(--navy); color: var(--white); font-weight: 600; }
+.btn-aqua:hover { background: var(--aqua-ink); border-color: var(--aqua-ink); color: var(--white); }
+
+
+/* 14. ACCESIBILIDAD Y MOVIMIENTO REDUCIDO -------------------------------- */
+a:focus-visible,
+.btn:focus-visible,
+.navbar-toggler:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fiber-pulse { animation: none; stroke-dasharray: none; opacity: 0; }
+  .profile-link { transition: none; }
+}
